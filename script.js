@@ -2,15 +2,15 @@
 let compChoice = " ";
 let userChoice = " ";
 
-// Creating empty scores to increment latergit p
+// Creating empty scores to 0 which we will increment later
 let playerScore = 0;
 let computerScore = 0;
 
 // Create a function called getComputerChoice() 
-function getComputerChoice(choice) {
+function getComputerChoice() {
 
     // Use Math.Random to generate a random number
-    choice = Math.floor(Math.random() * 3 + 1);
+    let choice = Math.floor(Math.random() * 3 + 1);
 
     // The function returns a STRING which is Rock, Paper, Scissors
     if (choice === 1) {
@@ -35,8 +35,18 @@ function getHumanChoice() {
     return userChoice.toLowerCase();
 }
 
+// Writing a logic to play the round of the game
+function playRound (humanChoice, computerChoice) {
+    humanChoice = getHumanChoice(userChoice);
+    computerChoice = getComputerChoice(compChoice)
+
+    return console.log(humanChoice + " " + computerChoice)
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
 // Log it to the console
-console.log(getHumanChoice(userChoice));
+console.log(playRound(humanSelection, computerSelection));
 
 
