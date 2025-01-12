@@ -37,16 +37,23 @@ function getHumanChoice() {
 
 // Writing a logic to play the round of the game
 function playRound (humanChoice, computerChoice) {
-    humanChoice = getHumanChoice(userChoice);
-    computerChoice = getComputerChoice(compChoice)
 
-    return console.log(humanChoice + " " + computerChoice)
+    // Convert to lowercase
+    humanChoice = getHumanChoice(userChoice).toLowerCase();
+    computerChoice = getComputerChoice(compChoice);
+
+    // Increment the player and computer score
+    playerScore++;
+    computerScore++;
+
+    // Return the choice and winner
+    return console.log("You lose! Paper beats Rock\n " + humanChoice + " " + computerChoice)
 }
 
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
 // Log it to the console
-console.log(playRound(humanSelection, computerSelection));
+playRound(humanSelection, computerSelection);
 
 
