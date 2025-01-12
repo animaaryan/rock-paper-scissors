@@ -1,8 +1,7 @@
 // Creating empty strings to store the choices
 let compChoice = " ";
-let userChoice = " ";
 
-// Creating empty scores to 0 which we will increment later
+// Set the scores for the players
 let playerScore = 0;
 let computerScore = 0;
 
@@ -29,31 +28,57 @@ function getComputerChoice() {
 function getHumanChoice() {
 
     // Use prompt to ask the user
-    userChoice = prompt("Enter your choice between rock, paper and scissors: ");
-    
+    let userInput = prompt("Enter your choice between rock, paper and scissors: ");
+    let userChoice = userInput.toLowerCase();
+
+    // Return one of the valid choices for the player
+    if (userChoice === "rock") {
+        userChoice = "Rock";
+    }
+    else if (userChoice === "paper") {
+        userChoice = "Paper";
+    }
+    else if (userChoice === "scissors") {
+        userChoice = "Scissors";
+    }
+    else {
+        alert("Incorrect choice!")
+        getHumanChoice();
+    }
     // Return the user choice 
-    return userChoice.toLowerCase();
+    return userChoice;
 }
 
 // Writing a logic to play the round of the game
-function playRound (humanChoice, computerChoice) {
+function playRound() {
 
-    // Convert to lowercase
-    humanChoice = getHumanChoice(userChoice).toLowerCase();
-    computerChoice = getComputerChoice(compChoice);
+    // Create variables to store the choice
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();;
 
-    // Increment the player and computer score
-    playerScore++;
-    computerScore++;
+    // Set a variable to store the result/message
+    let result = "";
+
+    // Run a if statement to check the choices
+    if (humanSelection === computerSelection) {
+        result += "It's a tie!";
+    }
+    else if ((humanSelection === "Rock" && computerSelection === "Scissors") ||
+        (humanSelection === "Paper" && computerSelection === "Rock") ||
+        (humanSelection === "Scissors" && computerSelection === "Paper")) {
+        result += ("You win! " + humanSelection + " beats " + computerSelection);
+    }
+    else if ((humanSelection === "Rock" && computerSelection === "Paper") ||
+        (humanSelection === "Paper" && computerSelection === "Scissors") ||
+        (humanSelection === "Scissors" && computerSelection === "Rock")) {
+        result += ("You lose :( " + humanSelection + " beats " + computerSelection);
+    }
 
     // Return the choice and winner
-    return console.log("You lose! Paper beats Rock\n " + humanChoice + " " + computerChoice)
+    return result;
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
 // Log it to the console
-playRound(humanSelection, computerSelection);
+console.log(playRound());
 
 
