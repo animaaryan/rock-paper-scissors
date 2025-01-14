@@ -104,17 +104,17 @@ function playGame() {
 
     // Check who has scored more and declare the winner
     if (playerScore > computerScore) {
-        console.log("You win! Computers won't be taking over soon");
+        alert("You win! Computers won't be taking over soon");
     }
     else if (computerScore > playerScore) {
-        console.log("You lose :( You're now part of the computers");
+        alert("You lose :( You're now part of the computers");
     }
     else if (computerScore === playerScore)
     {
-        console.log("Draw! BUT HOW, you both are smart?");
+        alert("Draw! BUT HOW, you both are smart?");
         }
     else{
-        console.log("Game over! No idea why, but yeah, it's over");
+        alert("Game over! No idea why, but yeah, it's over");
     }
 }
 
