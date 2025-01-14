@@ -5,6 +5,10 @@ let compChoice = " ";
 let playerScore = 0;
 let computerScore = 0;
 
+// Create an array for the scores
+let humanSelection = [];
+let computerSelection = [];
+
 // Create a function called getComputerChoice() 
 function getComputerChoice() {
 
@@ -50,11 +54,7 @@ function getHumanChoice() {
 }
 
 // Writing a logic to play the round of the game
-function playRound() {
-
-    // Create variables to store the choice
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();;
+function playRound(humanSelection, computerSelection) {
 
     // Set a variable to store the result/message
     let result = "";
@@ -78,7 +78,45 @@ function playRound() {
     return result;
 }
 
-// Log it to the console
-console.log(playRound());
+// Play the round 5 times atleast
+function playGame() {
 
+    // Run a for loop that plays the game 5 times before declaring the winner
+    for (let i = 0; i < 5; i++) {
+        // Create variable to access the data from playRound function
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        var results = playRound(humanChoice, computerChoice);
 
+        if (results === "You win! " + humanChoice + " beats " + computerChoice) {
+            playerScore++;
+            console.log("Player Score: " + playerScore)
+        }
+        else if (results === "You lose :( " + humanChoice + " beats " + computerChoice) {
+            computerScore++;
+            console.log("Computer Score: " + computerScore)
+        }
+
+        // Allows to push the values directly back into the array to fill it up
+        humanSelection.push(humanChoice);
+        computerSelection.push(computerChoice);
+    }
+
+    // Check who has scored more and declare the winner
+    if (playerScore > computerScore) {
+        console.log("You win! Computers won't be taking over soon");
+    }
+    else if (computerScore > playerScore) {
+        console.log("You lose :( You're now part of the computers");
+    }
+    else if (computerScore === playerScore)
+    {
+        console.log("Draw! BUT HOW, you both are smart?");
+        }
+    else{
+        console.log("Game over! No idea why, but yeah, it's over");
+    }
+}
+
+// Play the game
+playGame();
