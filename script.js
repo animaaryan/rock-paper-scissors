@@ -9,31 +9,55 @@ let computerScore = 0;
 let humanSelection = [];
 let computerSelection = [];
 
+//_____________________________________________________________
+
+// Select the ID of the three buttons
+const ROCK = document.getElementById("ROCK");
+const PAPER = document.getElementById("PAPER");
+const SCISSORS = document.getElementById("SCISSORS");
+
+// Pass to event listener
+ROCK?.addEventListener('click', function () {
+    playRound('Rock', computerSelection);
+});
+
+PAPER?.addEventListener('click', function () {
+    playRound('Paper', computerSelection);
+});
+
+SCISSORS?.addEventListener('click', function () {
+    playRound('Paper', computerSelection);
+});
+
+// Look for each clicked button and add an event listener
+const BUTTONS = document.querySelectorAll('button')
+BUTTONS.forEach((button) => {
+    button.addEventListener('click', function (e) {
+        playRound(humanSelection, computerSelection, e.target.value);
+    })
+})
+
+
+//_____________________________________________________________
+
 // Create a function called getComputerChoice() 
 function getComputerChoice() {
 
-    // Use Math.Random to generate a random number
-    let choice = Math.floor(Math.random() * 3 + 1);
+    // Create an array of choices
+    const OPTIONS = ["Rock", "Paper", "Scissors"];
 
-    // The function returns a STRING which is Rock, Paper, Scissors
-    if (choice === 1) {
-        compChoice = "Rock";
-    }
-    else if (choice === 2) {
-        compChoice = "Paper";
-    }
-    else {
-        compChoice = "Scissors";
-    }
-    return compChoice;
+    // Use Math.Random to generate a random number
+    const random = Math.floor(Math.random() * OPTIONS.length);
+
+    // Return the options through an array
+    return (OPTIONS[random]);
 }
 
 // Create a function to get a human choice 
 function getHumanChoice() {
 
     // Use prompt to ask the user
-    let userInput = prompt("Enter your choice between rock, paper and scissors: ");
-    let userChoice = userInput.toLowerCase();
+    let userChoice = prompt("Enter your choice between rock, paper and scissors: ").toLowerCase();;
 
     // Return one of the valid choices for the player
     if (userChoice === "rock") {
@@ -81,41 +105,41 @@ function playRound(humanSelection, computerSelection) {
 // Play the round 5 times atleast
 function playGame() {
 
-    // Run a for loop that plays the game 5 times before declaring the winner
-    for (let i = 0; i < 5; i++) {
-        // Create variable to access the data from playRound function
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        var results = playRound(humanChoice, computerChoice);
+    // Create variable to access the data from playRound function
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    var results = playRound(humanChoice, computerChoice);
 
-        if (results === "You win! " + humanChoice + " beats " + computerChoice) {
-            playerScore++;
-            console.log("Player Score: " + playerScore)
-        }
-        else if (results === "You lose :( " + humanChoice + " beats " + computerChoice) {
-            computerScore++;
-            console.log("Computer Score: " + computerScore)
-        }
-
-        // Allows to push the values directly back into the array to fill it up
-        humanSelection.push(humanChoice);
-        computerSelection.push(computerChoice);
+    if (results === "You win! " + humanChoice + " beats " + computerChoice) {
+        playerScore++;
+        console.log("Player Score: " + playerScore)
     }
+    else if (results === "You lose :( " + humanChoice + " beats " + computerChoice) {
+        computerScore++;
+        console.log("Computer Score: " + computerScore)
+    }
+
+    // Allows to push the values directly back into the array to fill it up
+    humanSelection.push(humanChoice);
+    computerSelection.push(computerChoice);
+
 
     // Check who has scored more and declare the winner
     if (playerScore > computerScore) {
-        alert("You win! Computers won't be taking over soon");
+        console.log("You win! Computers won't be taking over soon");
     }
     else if (computerScore > playerScore) {
-        alert("You lose :( You're now part of the computers");
+        console.log("You lose :( You're now part of the computers");
     }
-    else if (computerScore === playerScore)
-    {
-        alert("Draw! BUT HOW, you both are smart?");
-        }
-    else{
-        alert("Game over! No idea why, but yeah, it's over");
+    else if (computerScore === playerScore) {
+        console.log("Draw! BUT HOW, you both are smart?");
     }
+    else {
+        console.log("Game over! No idea why, but yeah, it's over");
+    }
+
+    // Also log the score just in case LOL
+    console.log("HUMAN: " + playerScore + " COMPUTER: " + computerScore);
 }
 
 // Play the game
