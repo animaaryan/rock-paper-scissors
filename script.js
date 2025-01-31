@@ -120,7 +120,7 @@ function playRound(humanSelection, computerSelection) {
     else if ((humanSelection === "Rock" && computerSelection === "Paper") ||
         (humanSelection === "Paper" && computerSelection === "Scissors") ||
         (humanSelection === "Scissors" && computerSelection === "Rock")) {
-        COMP_SHOW.innerText = "Nope... " + computerSelection + " beats " + humanSelection;    
+        COMP_SHOW.innerText = "Nope... " + computerSelection + " beats " + humanSelection;
         computerScore++;
 
         // Also log the score just in case LOL
@@ -133,27 +133,25 @@ function playRound(humanSelection, computerSelection) {
     }
 
     if (playerScore === 5) {
-        WINNER_SHOW.innerText = "You win! Computers won't be taking over soon";
 
-        WINNER_SHOW.innerText = "GAME OVER! The final score is: " + playerScore + " to " + computerScore;
-        
+        WINNER_SHOW.innerText = "YOU WIN! The final score is: " + playerScore + " to " + computerScore;
+
         var delayInMilliseconds = 1000;
 
-        setTimeout(function() {
+        setTimeout(function () {
             restart();
-          }, delayInMilliseconds);
+        }, delayInMilliseconds);
     }
 
     else if (computerScore === 5) {
-        LOSER_SHOW.innerText = "You lose :( You're now part of the computers";
 
-        LOSER_SHOW.innerText = "GAME OVER! The final score is: " + playerScore + " to " + computerScore;
+        LOSER_SHOW.innerText = "YOU LOST! The final score is: " + playerScore + " to " + computerScore;
 
         var delayInMilliseconds = 1000;
 
-        setTimeout(function() {
+        setTimeout(function () {
             restart();
-          }, delayInMilliseconds);
+        }, delayInMilliseconds);
     }
 }
 
