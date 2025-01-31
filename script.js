@@ -9,36 +9,46 @@ let computerScore = 0;
 let humanSelection = [];
 let computerSelection = [];
 
-//_____________________________________________________________
-
-// Select the ID of the three buttons
-const ROCK = document.getElementById("ROCK");
-const PAPER = document.getElementById("PAPER");
-const SCISSORS = document.getElementById("SCISSORS");
-
-// Pass to event listener
-ROCK?.addEventListener('click', function () {
-    playRound('Rock', computerSelection);
-});
-
-PAPER?.addEventListener('click', function () {
-    playRound('Paper', computerSelection);
-});
-
-SCISSORS?.addEventListener('click', function () {
-    playRound('Paper', computerSelection);
-});
-
-// Look for each clicked button and add an event listener
-const BUTTONS = document.querySelectorAll('button')
-BUTTONS.forEach((button) => {
-    button.addEventListener('click', function (e) {
-        playRound(humanSelection, computerSelection, e.target.value);
-    })
-})
+// //__________________________________________________
+//                 CREATE A UI HERE
+// //__________________________________________________
 
 
-//_____________________________________________________________
+// Create scores here
+const SCORES = document.createElement('h3');
+SCORES.innerText = 'Scores ';
+document.body.appendChild(SCORES);
+
+const PLAYER_SCORE = document.createElement('h3');
+PLAYER_SCORE.innerText = "Player: " + playerScore;
+document.body.appendChild(PLAYER_SCORE);
+
+const COMPUTER_SCORE = document.createElement('h3');
+COMPUTER_SCORE.innerText = "Computer: " + computerScore;
+document.body.appendChild(COMPUTER_SCORE);
+
+// Element for showing actual selection
+let ACTUAL_SELECT = document.createElement('p');
+document.body.appendChild(ACTUAL_SELECT);
+
+// Show who is winning
+let PLAYER_SHOW = document.createElement('h3');
+document.body.appendChild(PLAYER_SHOW);
+
+let COMP_SHOW = document.createElement('h3');
+document.body.appendChild(COMP_SHOW);
+
+let DRAW_SHOW = document.createElement('h3');
+document.body.appendChild(DRAW_SHOW);
+
+// Winner or lose
+let WINNER_SHOW = document.createElement('h1');
+document.body.appendChild(WINNER_SHOW);
+
+let LOSER_SHOW = document.createElement('h1');
+document.body.appendChild(LOSER_SHOW);
+
+//__________________________________________________
 
 // Create a function called getComputerChoice() 
 function getComputerChoice() {
@@ -56,91 +66,127 @@ function getComputerChoice() {
 // Create a function to get a human choice 
 function getHumanChoice() {
 
-    // Use prompt to ask the user
-    let userChoice = prompt("Enter your choice between rock, paper and scissors: ").toLowerCase();;
+    // Select the ID of the three buttons
+    const ROCK = document.getElementById("ROCK"); // Select Rock ID
+    const PAPER = document.getElementById("PAPER"); // Select Paper ID
+    const SCISSORS = document.getElementById("SCISSORS"); // Select Scissors ID
 
-    // Return one of the valid choices for the player
-    if (userChoice === "rock") {
-        userChoice = "Rock";
-    }
-    else if (userChoice === "paper") {
-        userChoice = "Paper";
-    }
-    else if (userChoice === "scissors") {
-        userChoice = "Scissors";
-    }
-    else {
-        alert("Incorrect choice!")
-        getHumanChoice();
-    }
-    // Return the user choice 
-    return userChoice;
+    // Pass to event listener
+    ROCK?.addEventListener('click', () => {
+        playRound("Rock", getComputerChoice());
+    });
+
+    PAPER?.addEventListener('click', () => {
+        playRound("Paper", getComputerChoice());
+    });
+
+    SCISSORS?.addEventListener('click', () => {
+        playRound("Scissors", getComputerChoice());
+    });
 }
+
+//__________________________________________________
 
 // Writing a logic to play the round of the game
 function playRound(humanSelection, computerSelection) {
 
-    // Set a variable to store the result/message
-    let result = "";
+    PLAYER_SHOW.innerText = "";
+    COMP_SHOW.innerText = "";
+    DRAW_SHOW.innerText = "";
+    WINNER_SHOW.innerText = "";
+    LOSER_SHOW.innerText = "";
 
     // Run a if statement to check the choices
     if (humanSelection === computerSelection) {
-        result += "It's a tie!";
+        DRAW_SHOW.innerText = "Draw? Draw!";
+
+        // Also log the score just in case LOL
+        PLAYER_SCORE.innerText = "Player: " + playerScore;
+        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
+
     }
+
     else if ((humanSelection === "Rock" && computerSelection === "Scissors") ||
         (humanSelection === "Paper" && computerSelection === "Rock") ||
         (humanSelection === "Scissors" && computerSelection === "Paper")) {
-        result += ("You win! " + humanSelection + " beats " + computerSelection);
+        PLAYER_SHOW.innerText = "Nice! " + humanSelection + " beats " + computerSelection;
+        playerScore++;
+
+        // Also log the score just in case LOL
+        PLAYER_SCORE.innerText = "Player: " + playerScore;
+        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
     }
+
     else if ((humanSelection === "Rock" && computerSelection === "Paper") ||
         (humanSelection === "Paper" && computerSelection === "Scissors") ||
         (humanSelection === "Scissors" && computerSelection === "Rock")) {
-        result += ("You lose :( " + humanSelection + " beats " + computerSelection);
+        COMP_SHOW.innerText = "Nope... " + computerSelection + " beats " + humanSelection;    
+        computerScore++;
+
+        // Also log the score just in case LOL
+        PLAYER_SCORE.innerText = "Player: " + playerScore;
+        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
     }
 
-    // Return the choice and winner
-    return result;
+    else {
+        ACTUAL_SELECT.textContent = "Select between Rock, Paper and Scissors";
+    }
+
+    if (playerScore === 5) {
+        WINNER_SHOW.innerText = "You win! Computers won't be taking over soon";
+
+        WINNER_SHOW.innerText = "GAME OVER! The final score is: " + playerScore + " to " + computerScore;
+        
+        var delayInMilliseconds = 1000;
+
+        setTimeout(function() {
+            restart();
+          }, delayInMilliseconds);
+    }
+
+    else if (computerScore === 5) {
+        LOSER_SHOW.innerText = "You lose :( You're now part of the computers";
+
+        LOSER_SHOW.innerText = "GAME OVER! The final score is: " + playerScore + " to " + computerScore;
+
+        var delayInMilliseconds = 1000;
+
+        setTimeout(function() {
+            restart();
+          }, delayInMilliseconds);
+    }
 }
 
-// Play the round 5 times atleast
+//__________________________________________________
+
 function playGame() {
 
     // Create variable to access the data from playRound function
     let humanChoice = getHumanChoice();
     let computerChoice = getComputerChoice();
-    var results = playRound(humanChoice, computerChoice);
-
-    if (results === "You win! " + humanChoice + " beats " + computerChoice) {
-        playerScore++;
-        console.log("Player Score: " + playerScore)
-    }
-    else if (results === "You lose :( " + humanChoice + " beats " + computerChoice) {
-        computerScore++;
-        console.log("Computer Score: " + computerScore)
-    }
 
     // Allows to push the values directly back into the array to fill it up
     humanSelection.push(humanChoice);
     computerSelection.push(computerChoice);
-
-
-    // Check who has scored more and declare the winner
-    if (playerScore > computerScore) {
-        console.log("You win! Computers won't be taking over soon");
-    }
-    else if (computerScore > playerScore) {
-        console.log("You lose :( You're now part of the computers");
-    }
-    else if (computerScore === playerScore) {
-        console.log("Draw! BUT HOW, you both are smart?");
-    }
-    else {
-        console.log("Game over! No idea why, but yeah, it's over");
-    }
-
-    // Also log the score just in case LOL
-    console.log("HUMAN: " + playerScore + " COMPUTER: " + computerScore);
 }
+
+function restart() {
+
+    PLAYER_SHOW.innerText = "";
+    COMP_SHOW.innerText = "";
+    DRAW_SHOW.innerText = "";
+    WINNER_SHOW.innerText = "";
+    LOSER_SHOW.innerText = "";
+
+    playerScore = 0;
+    PLAYER_SCORE.innerText = "Player: " + playerScore;
+
+    computerScore = 0;
+    COMPUTER_SCORE.innerText = "Computer: " + computerScore;
+
+}
+
+//__________________________________________________
 
 // Play the game
 playGame();
