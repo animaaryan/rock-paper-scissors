@@ -19,34 +19,75 @@ const SCORES = document.createElement('h3');
 SCORES.innerText = 'Scores ';
 document.body.appendChild(SCORES);
 
-const PLAYER_SCORE = document.createElement('h3');
-PLAYER_SCORE.innerText = "Player: " + playerScore;
-document.body.appendChild(PLAYER_SCORE);
-
-const COMPUTER_SCORE = document.createElement('h3');
-COMPUTER_SCORE.innerText = "Computer: " + computerScore;
-document.body.appendChild(COMPUTER_SCORE);
+const FINAL_SCORE = document.createElement('h3');
+FINAL_SCORE.innerText =  playerScore + " : " + computerScore;
+document.body.appendChild(FINAL_SCORE);
 
 // Element for showing actual selection
 let ACTUAL_SELECT = document.createElement('p');
 document.body.appendChild(ACTUAL_SELECT);
 
+//Style here because i'm lazy to search how to in CSS
+SCORES.style.color = "#FF99C9";
+SCORES.style.fontSize = "3rem";
+SCORES.style.display = "flex";
+SCORES.style.alignItems = "center";
+SCORES.style.justifyContent = "center";
+SCORES.style.fontFamily = "Rubik Spray Paint, serif";
+SCORES.style.fontWeight = "400";
+
+FINAL_SCORE.style.fontSize = "3rem";
+FINAL_SCORE.style.display = "flex";
+FINAL_SCORE.style.alignItems = "center";
+FINAL_SCORE.style.justifyContent = "center";
+FINAL_SCORE.style.border = "#000 solid 2px";
+FINAL_SCORE.style.margin = "0px 30%";
+
+//__________________________________________________
+
+
 // Show who is winning
-let PLAYER_SHOW = document.createElement('h3');
-document.body.appendChild(PLAYER_SHOW);
+let player_show = document.createElement('h3');
+document.body.appendChild(player_show);
 
-let COMP_SHOW = document.createElement('h3');
-document.body.appendChild(COMP_SHOW);
+let comp_show = document.createElement('h3');
+document.body.appendChild(comp_show);
 
-let DRAW_SHOW = document.createElement('h3');
-document.body.appendChild(DRAW_SHOW);
+let draw_show = document.createElement('h3');
+document.body.appendChild(draw_show);
 
 // Winner or lose
-let WINNER_SHOW = document.createElement('h1');
-document.body.appendChild(WINNER_SHOW);
+let winner_show = document.createElement('h1');
+document.body.appendChild(winner_show);
 
-let LOSER_SHOW = document.createElement('h1');
-document.body.appendChild(LOSER_SHOW);
+let loser_show = document.createElement('h1');
+document.body.appendChild(loser_show);
+
+//Style here because i'm lazy to search how to in CSS
+player_show.style.color = "#9EB25D";
+player_show.style.display = "flex";
+player_show.style.alignItems = "center";
+player_show.style.justifyContent = "center";
+
+comp_show.style.color = "#AD343E";
+comp_show.style.display = "flex";
+comp_show.style.alignItems = "center";
+comp_show.style.justifyContent = "center";
+
+draw_show.style.color = "#A88FAC";
+draw_show.style.display = "flex";
+draw_show.style.alignItems = "center";
+draw_show.style.justifyContent = "center";
+
+winner_show.style.color = "#9EB25D";
+winner_show.style.display = "flex";
+winner_show.style.alignItems = "center";
+winner_show.style.justifyContent = "center";
+
+loser_show.style.color = "#AD343E";
+loser_show.style.display = "flex";
+loser_show.style.alignItems = "center";
+loser_show.style.justifyContent = "center";
 
 //__________________________________________________
 
@@ -90,42 +131,38 @@ function getHumanChoice() {
 // Writing a logic to play the round of the game
 function playRound(humanSelection, computerSelection) {
 
-    PLAYER_SHOW.innerText = "";
-    COMP_SHOW.innerText = "";
-    DRAW_SHOW.innerText = "";
-    WINNER_SHOW.innerText = "";
-    LOSER_SHOW.innerText = "";
+    player_show.innerText = "";
+    comp_show.innerText = "";
+    draw_show.innerText = "";
+    winner_show.innerText = "";
+    loser_show.innerText = "";
 
     // Run a if statement to check the choices
     if (humanSelection === computerSelection) {
-        DRAW_SHOW.innerText = "Draw? Draw!";
+        draw_show.innerText = "Draw? Draw!";
 
         // Also log the score just in case LOL
-        PLAYER_SCORE.innerText = "Player: " + playerScore;
-        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
-
+        FINAL_SCORE.innerText =  playerScore + " : " + computerScore;
     }
 
     else if ((humanSelection === "Rock" && computerSelection === "Scissors") ||
         (humanSelection === "Paper" && computerSelection === "Rock") ||
         (humanSelection === "Scissors" && computerSelection === "Paper")) {
-        PLAYER_SHOW.innerText = "Nice! " + humanSelection + " beats " + computerSelection;
+        player_show.innerText = "Nice! " + humanSelection + " beats " + computerSelection;
         playerScore++;
 
         // Also log the score just in case LOL
-        PLAYER_SCORE.innerText = "Player: " + playerScore;
-        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
+        FINAL_SCORE.innerText =  playerScore + " : " + computerScore;
     }
 
     else if ((humanSelection === "Rock" && computerSelection === "Paper") ||
         (humanSelection === "Paper" && computerSelection === "Scissors") ||
         (humanSelection === "Scissors" && computerSelection === "Rock")) {
-        COMP_SHOW.innerText = "Nope... " + computerSelection + " beats " + humanSelection;
+        comp_show.innerText = "Nope... " + computerSelection + " beats " + humanSelection;
         computerScore++;
 
         // Also log the score just in case LOL
-        PLAYER_SCORE.innerText = "Player: " + playerScore;
-        COMPUTER_SCORE.innerText = "Computer: " + computerScore;
+        FINAL_SCORE.innerText =  playerScore + " : " + computerScore;
     }
 
     else {
@@ -134,7 +171,7 @@ function playRound(humanSelection, computerSelection) {
 
     if (playerScore === 5) {
 
-        WINNER_SHOW.innerText = "YOU WIN! The final score is: " + playerScore + " to " + computerScore;
+        winner_show.innerText = "YOU WIN! The final score is: " + playerScore + " to " + computerScore;
 
         var delayInMilliseconds = 1000;
 
@@ -145,7 +182,7 @@ function playRound(humanSelection, computerSelection) {
 
     else if (computerScore === 5) {
 
-        LOSER_SHOW.innerText = "YOU LOST! The final score is: " + playerScore + " to " + computerScore;
+        loser_show.innerText = "YOU LOST! The final score is: " + playerScore + " to " + computerScore;
 
         var delayInMilliseconds = 1000;
 
@@ -170,18 +207,15 @@ function playGame() {
 
 function restart() {
 
-    PLAYER_SHOW.innerText = "";
-    COMP_SHOW.innerText = "";
-    DRAW_SHOW.innerText = "";
-    WINNER_SHOW.innerText = "";
-    LOSER_SHOW.innerText = "";
+    player_show.innerText = "";
+    comp_show.innerText = "";
+    draw_show.innerText = "";
+    winner_show.innerText = "";
+    loser_show.innerText = "";
 
     playerScore = 0;
-    PLAYER_SCORE.innerText = "Player: " + playerScore;
-
     computerScore = 0;
-    COMPUTER_SCORE.innerText = "Computer: " + computerScore;
-
+    FINAL_SCORE.innerText =  playerScore + " : " + computerScore;
 }
 
 //__________________________________________________
