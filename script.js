@@ -222,3 +222,14 @@ function restart() {
 
 // Play the game
 playGame();
+
+$(function() {
+    $("#IMG").hover(
+        function() {
+            $(this).attr("src", "Paper/paper.gif");
+        },
+        function() {
+            $(this).attr("src", "Paper/frame_01.png");
+        }                         
+    );                  
+});
