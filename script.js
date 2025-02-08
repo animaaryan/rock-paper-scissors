@@ -184,7 +184,7 @@ function playRound(humanSelection, computerSelection) {
 
         loser_show.innerText = "YOU LOST! The final score is: " + playerScore + " to " + computerScore;
 
-        var delayInMilliseconds = 1000;
+        var delayInMilliseconds = 1500;
 
         setTimeout(function () {
             restart();
@@ -223,13 +223,3 @@ function restart() {
 // Play the game
 playGame();
 
-$(function() {
-    $("#IMG").hover(
-        function() {
-            $(this).attr("src", "Paper/paper.gif");
-        },
-        function() {
-            $(this).attr("src", "Paper/frame_01.png");
-        }                         
-    );                  
-});

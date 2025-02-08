@@ -1,6 +1,6 @@
 body {
-    background-color: #F0F7EE;
-    margin-top: 17%;
+    background-color: #2d5223;
+    margin-top: 10%;
 }
 
 .heading-title {
@@ -12,7 +12,7 @@ body {
     background-color: #0F7173;
     border: #28262C solid 6px;
 
-    margin: 0px 10%;
+    margin: 0px 20%;
 
     font-size: 3rem;
     font-family: "Rubik Spray Paint", serif;
@@ -32,7 +32,7 @@ body {
 #PAPER,
 #SCISSORS {
 
-    background-image: linear-gradient(#F0F7EE, #FABC2A);
+    background-image: #FABC2A;
     border: 0 solid #e5e7eb;
     border-radius: .2rem;
     color: #E66077;
@@ -42,6 +42,7 @@ body {
     text-transform: none;
 
     padding: 0;
+    
 }
 
 #SCISSORS:active,
@@ -71,10 +72,4 @@ body {
 
 .static:hover {
     opacity: 0;
-}
-
-.resize-image {
-    display: flex;
-    width: 20px;
-    height: 20px;
 }
